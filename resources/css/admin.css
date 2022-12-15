@@ -1,9 +1,8 @@
-@import "./modern-vertical/style.css";
 @import "@mdi/font/css/materialdesignicons.min.css";
+@import "./modern-vertical/style.css";
 @import "flag-icon-css/css/flag-icons.min.css";
 @import "owl.carousel/dist/assets/owl.carousel.min.css";
 @import "owl.carousel/dist/assets/owl.theme.default.min.css";
-/* @import "./../vendors/owl-carousel-2/owl.theme.default.min.css"; */
 
 .auth-btn{
     letter-spacing: 2px;

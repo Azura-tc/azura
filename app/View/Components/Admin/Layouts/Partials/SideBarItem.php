@@ -11,7 +11,7 @@ class SideBarItem extends Component
      *
      * @return void
      */
-    public function __construct(public string $label, public ?string $href = null, public ?string $icon = null, public ?bool $active)
+    public function __construct(public string $label, public ?string $href = null, public ?string $icon = null, public ?bool $active, public ?array $items = null)
     {
         //
     }

@@ -43,7 +43,7 @@
             </div>
         </li>
         @foreach ($navigationItems as $item)
-            <x-admin.layouts.partials.side-bar-item :label="$item['label']" :href="$item['href']" :icon="$item['icon']" :active="$item['active']" />
+            <x-admin.layouts.partials.side-bar-item :label="$item['label']" :href="$item['href']" :icon="$item['icon']" :active="$item['active']" :items="$item['items']" />
         @endforeach
     </ul>
 </nav>

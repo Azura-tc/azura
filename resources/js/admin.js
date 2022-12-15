@@ -1,6 +1,7 @@
 import './vendor.bundle.base'
 import 'chart.js'
 import 'progressbar.js'
+import 'owl.carousel'
 import './jquery.cookie'
 import './off-canvas'
 import './hoverable-collapse'

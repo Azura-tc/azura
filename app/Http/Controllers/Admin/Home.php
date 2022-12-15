@@ -11,4 +11,14 @@ class Home extends Controller
     {
         return view('admin.home.index');
     }
+
+    public function changePassword()
+    {
+        return view('admin.home.change-password');
+    }
+
+    public function editeProfile()
+    {
+        return view('admin.home.edit-profile');
+    }
 }

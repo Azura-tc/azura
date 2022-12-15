@@ -20,20 +20,34 @@ class SideBar extends Component
                 'label' => 'Navigation',
                 'href' => null,
                 'icon' => null,
-                'active' => null
+                'active' => null,
+                'items' => null,
             ],
             [
                 'label' => 'Dashboard',
                 'href' => route('admin.dashboard'),
                 'icon' => 'mdi mdi-speedometer',
                 'active' => Route::is('admin.dashboard'),
+                'items' => null,
             ],
-            // [
-            //     'label' => 'Settings',
-            //     'href' => route('admin.dashboard'),
-            //     'icon' => 'ti-shield',
-            //     'active' => Route::is('admin.dashboard'),
-            // ],
+            [
+                'label' => 'Settings',
+                'href' => null,
+                'icon' => 'mdi mdi-cog',
+                'active' => Route::is('admin.setting.*'),
+                'items' => [
+                    [
+                        'label' => "Edit Profile",
+                        'href' => route('admin.setting.edit-profile'),
+                        'active' => Route::is('admin.setting.edit-profile')
+                    ],
+                    [
+                        'label' => "Change Password",
+                        'href' => route('admin.setting.change-password'),
+                        'active' => Route::is('admin.setting.change-password')
+                    ],
+                ]
+            ],
         ];
     }
 
