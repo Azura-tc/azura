@@ -10,5 +10,12 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "@mdi/font": "^7.1.96",
+        "chart.js": "^4.0.1",
+        "flag-icon-css": "^4.1.7",
+        "owl.carousel": "^2.3.4",
+        "progressbar.js": "^1.1.0"
     }
 }
