@@ -31,23 +31,37 @@ class SideBar extends Component
                 'items' => null,
             ],
             [
-                'label' => 'Settings',
+                'label' => 'Security',
                 'href' => null,
-                'icon' => 'mdi mdi-cog',
-                'active' => Route::is('admin.setting.*'),
-                'items' => [
-                    [
-                        'label' => "Edit Profile",
-                        'href' => route('admin.setting.edit-profile'),
-                        'active' => Route::is('admin.setting.edit-profile')
-                    ],
-                    [
-                        'label' => "Change Password",
-                        'href' => route('admin.setting.change-password'),
-                        'active' => Route::is('admin.setting.change-password')
-                    ],
-                ]
+                'icon' => null,
+                'active' => null,
+                'items' => null,
             ],
+            [
+                'label' => 'Profile',
+                'href' => route('admin.profile'),
+                'icon' => 'mdi mdi-cog',
+                'active' => Route::is('admin.profile'),
+                'items' => null,
+            ],
+            // [
+            //     'label' => 'Settings',
+            //     'href' => null,
+            //     'icon' => 'mdi mdi-cog',
+            //     'active' => Route::is('admin.setting.*'),
+            //     'items' => [
+            //         [
+            //             'label' => "Edit Profile",
+            //             'href' => route('admin.setting.edit-profile'),
+            //             'active' => Route::is('admin.setting.edit-profile')
+            //         ],
+            //         [
+            //             'label' => "Change Password",
+            //             'href' => route('admin.setting.change-password'),
+            //             'active' => Route::is('admin.setting.change-password')
+            //         ],
+            //     ]
+            // ],
         ];
     }
 
