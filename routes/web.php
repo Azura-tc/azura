@@ -17,4 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-require_once __DIR__.DIRECTORY_SEPARATOR. 'admin.php';
+// Admin Route
+require_once __DIR__.DIRECTORY_SEPARATOR. 'admin' .DIRECTORY_SEPARATOR. 'chris.php';
+require_once __DIR__.DIRECTORY_SEPARATOR. 'admin' .DIRECTORY_SEPARATOR. 'julien.php';
+require_once __DIR__.DIRECTORY_SEPARATOR. 'admin' .DIRECTORY_SEPARATOR. 'salam.php';
+
+// Front Route
+require_once __DIR__.DIRECTORY_SEPARATOR. 'front' .DIRECTORY_SEPARATOR. 'chris.php';
+require_once __DIR__.DIRECTORY_SEPARATOR. 'front' .DIRECTORY_SEPARATOR. 'julien.php';
+require_once __DIR__.DIRECTORY_SEPARATOR. 'front' .DIRECTORY_SEPARATOR. 'salam.php';

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -41,4 +42,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function informations() : HasMany
+    {
+        return $this->hasMany(informations::class, 'created_by');
+    }
+
+    public function projects() : HasMany
+    {
+        return $this->hasMany(Project::class, 'created_by');
+    }
+
+    public function sections() : HasMany
+    {
+        return $this->hasMany(Section::class, 'created_by');
+    }
+
+    public function services() : HasMany
+    {
+        return $this->hasMany(Service::class, 'created_by');
+    }
+
+    public function teams() : HasMany
+    {
+        return $this->hasMany(Team::class, 'created_by');
+    }
+
+    public function socials() : HasMany
+    {
+        return $this->hasMany(Social::class, 'created_by');
+    }
 }
