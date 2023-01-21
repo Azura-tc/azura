@@ -39,9 +39,8 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Fortify::loginView(function () {
-            return view('admin.auth.login');
-        });
+        Fortify::loginView(fn () => inertia('Auth/Login', ['status' => session('status'),]));
+
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
 
@@ -50,15 +49,16 @@ class FortifyServiceProvider extends ServiceProvider
                 return $user;
             }
         });
-        Fortify::registerView(function () {
-            return view('admin.auth.register');
-        });
-        Fortify::requestPasswordResetLinkView(function () {
-            return view('admin.auth.forgot-password');
-        });
-        Fortify::resetPasswordView(function ($request) {
-            return view('admin.auth.reset-password', ['request' => $request]);
-        });
+
+        Fortify::registerView(fn () => inertia('Auth/Register'));
+
+        Fortify::requestPasswordResetLinkView(fn () => inertia('Auth/ForgotPassword', ['status' => session('status'),]));
+
+        Fortify::resetPasswordView(fn ($request) => inertia('Auth/ResetPassword', [
+            'email' => $request->email,
+            'token' => $request->route('token'),
+        ]));
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);

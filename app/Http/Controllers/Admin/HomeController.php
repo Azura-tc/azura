@@ -9,11 +9,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('admin.home.index');
+        return inertia('Home/Dashboard');
     }
 
     public function profile()
     {
-        return view('admin.home.profile');
+        return inertia('Home/Profile');
     }
 }

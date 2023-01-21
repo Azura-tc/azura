@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Admin Route
 require_once __DIR__.DIRECTORY_SEPARATOR. 'admin' .DIRECTORY_SEPARATOR. 'chris.php';
