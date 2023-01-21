@@ -10,6 +10,10 @@
             type: Boolean,
             default: false
         },
+        isTextarea: {
+            type: Boolean,
+            default: false
+        },
         autofocus: {
             type: Boolean,
             default: false
@@ -43,7 +47,7 @@
           :for="inputId"
           v-if="label"
         >{{ label }}</label>
-        <input
+        <component :is="(isTextarea)? 'textarea' : 'input'"
           :value="modelValue"
           :autofocus="autofocus"
           :class="[{ 'is-invalid' : error }, inputClass]"

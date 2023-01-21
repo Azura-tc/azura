@@ -19,8 +19,8 @@ export default function (definition, rememberKey) {
         form.clearErrors();
 
         const validation = intus.validate(form.data(), rules);
-
-        if (!validation.passes()) {
+        console.log({validation: validation.passes()})
+        if (!validation?.passes()) {
           form.setError(validation.errors());
           return () => {};
         }

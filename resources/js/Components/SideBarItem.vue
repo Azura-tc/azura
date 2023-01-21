@@ -23,7 +23,7 @@ const currentComponent = computed(() => usePage().component)
             </ul>
         </div>
     </li>
-    <li v-else-if="navItem?.href" class="nav-item menu-items" :class="{'active' : currentComponent === navItem?.active}">
+    <li v-else-if="navItem?.href" class="nav-item menu-items" :class="{'active' : currentComponent.startsWith(navItem?.active)}">
         <Link class="nav-link" :href="navItem?.href">
             <span class="menu-icon">
                 <i :class="navItem?.icon"></i>

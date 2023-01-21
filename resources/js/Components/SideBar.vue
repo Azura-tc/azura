@@ -16,6 +16,42 @@ const navItems = [
         active : 'Home/Dashboard'
     },
     {
+        label : 'Informations'
+    },
+    {
+        label : 'Informations',
+        href : route('admin.info.index'),
+        icon : 'mdi mdi-information',
+        active : 'Information/'
+    },
+    {
+        label : 'Informations'
+    },
+    {
+        label : 'Informations',
+        href : route('admin.info.index'),
+        icon : 'mdi mdi-information',
+        active : 'Information/'
+    },
+    {
+        label : 'Informations'
+    },
+    {
+        label : 'Informations',
+        href : route('admin.info.index'),
+        icon : 'mdi mdi-information',
+        active : 'Information/Index'
+    },
+    {
+        label : 'Informations'
+    },
+    {
+        label : 'Informations',
+        href : route('admin.info.index'),
+        icon : 'mdi mdi-information',
+        active : 'Information/Index'
+    },
+    {
         label : 'Security'
     },
     {

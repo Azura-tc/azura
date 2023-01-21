@@ -12,6 +12,8 @@ class Information extends Model
 {
     use HasFactory, SoftDeletes, UserCreatedTrait;
 
+    protected $fillable = ['name', 'tel', 'email', 'bp', 'description', 'address'];
+
     public function createdBy():BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

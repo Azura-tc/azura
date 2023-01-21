@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->foreignId('created_by')->constrained('users');
-            $table->foreignId('updated_by')->constrained('users');
-            $table->foreignId('deleted_by')->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

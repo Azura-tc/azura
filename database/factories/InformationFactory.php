@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class InformationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => 'Azura',
+            'tel' => '+22895326489',
+            'email' => 'support@azura.com',
+            'created_by' => User::first()->id,
+            // 'updated_by' => User::first()->id,
+            // 'deleted_by' => null,
         ];
     }
 }

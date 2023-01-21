@@ -17,7 +17,9 @@ class InformationController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Information/Index', [
+            'info' => Information::first(),
+        ]);
     }
 
     /**
@@ -27,7 +29,7 @@ class InformationController extends Controller
      */
     public function create()
     {
-        //
+        // return inertia('Information/Create');
     }
 
     /**
@@ -58,9 +60,9 @@ class InformationController extends Controller
      * @param  \App\Models\Information  $information
      * @return \Illuminate\Http\Response
      */
-    public function edit(Information $information)
+    public function edit(Information $info)
     {
-        //
+        return inertia('Information/Update', ['info' => $info]);
     }
 
     /**
@@ -70,9 +72,11 @@ class InformationController extends Controller
      * @param  \App\Models\Information  $information
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateInformationRequest $request, Information $information)
+    public function update(UpdateInformationRequest $request, Information $info)
     {
-        //
+        $info->update($request->all());
+
+        return to_route('admin.info.index');
     }
 
     /**

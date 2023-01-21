@@ -3,8 +3,16 @@
 @import "flag-icon-css/css/flag-icons.min.css";
 @import "owl.carousel/dist/assets/owl.carousel.min.css";
 @import "owl.carousel/dist/assets/owl.theme.default.min.css";
+@import "./sweetalert2.min.css";
 
 .auth-btn{
     letter-spacing: 2px;
     font-weight: 500;
+}
+.table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
+    vertical-align: middle;
+    font-size: 0.875rem;
+    line-height: normal;
+    white-space: normal;
+    padding: 0.9375rem;
 }
