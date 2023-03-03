@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import route from '../../../vendor/tightenco/ziggy';
 import SideBarItem from './SideBarItem.vue';
+// import { vOnClickOutside } from '@vueuse/components'
+import { onClickOutside } from '@vueuse/core'
+// import { useClickOutside } from '@/Reusables/useClickOutside'
 
 defineProps({name : String})
 
@@ -25,31 +28,25 @@ const navItems = [
         active : 'Information/'
     },
     {
-        label : 'Informations'
+        label : 'Social',
+        href : route('admin.social.index'),
+        icon : 'mdi mdi-access-point',
+        active : 'Social/'
     },
     {
-        label : 'Informations',
-        href : route('admin.info.index'),
-        icon : 'mdi mdi-information',
-        active : 'Information/'
+        label : 'Site'
     },
     {
-        label : 'Informations'
+        label : 'Sections',
+        href : route('admin.section.index'),
+        icon : 'mdi mdi-ticket-confirmation-outline',
+        active : 'Section/'
     },
     {
-        label : 'Informations',
-        href : route('admin.info.index'),
-        icon : 'mdi mdi-information',
-        active : 'Information/Index'
-    },
-    {
-        label : 'Informations'
-    },
-    {
-        label : 'Informations',
-        href : route('admin.info.index'),
-        icon : 'mdi mdi-information',
-        active : 'Information/Index'
+        label : 'Services',
+        href : route('admin.service.index'),
+        icon : 'mdi mdi-toolbox-outline',
+        active : 'Service/'
     },
     {
         label : 'Security'
@@ -62,10 +59,17 @@ const navItems = [
     }
 ]
 
+const sidebar = ref(null)
+
+const mobileSidebarToggle = () => sidebar.value?.classList.toggle('active')
+
+onClickOutside(sidebar, () => sidebar.value?.classList.remove('active'))
+// useClickOutside(sidebar, ()=> sidebar.value?.classList.toggle('active'))
+
 </script>
 
 <template>
-<nav class="sidebar sidebar-offcanvas" id="sidebar" ref="sidebar">
+<nav class="sidebar sidebar-offcanvas" id="sidebar" ref="sidebar" >
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
         <Link class="sidebar-brand brand-logo" :href="route('admin.dashboard')"><img src="" alt="logo" /></Link>
         <Link class="sidebar-brand brand-logo-mini" :href="route('admin.dashboard')"><img src="

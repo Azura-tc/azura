@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\Social;
+
+use Illuminate\Http\UploadedFile;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSocialRequest;
 use App\Http\Requests\UpdateSocialRequest;
 
@@ -17,7 +19,7 @@ class SocialController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Social/Index', ['socials' => Social::all()]);
     }
 
     /**
@@ -27,7 +29,7 @@ class SocialController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Social/Form');
     }
 
     /**
@@ -38,7 +40,9 @@ class SocialController extends Controller
      */
     public function store(StoreSocialRequest $request)
     {
-        //
+        $social = Social::create([...$request->all(), 'icon' => $request->file('icon')->store('socials', 'public')]);
+
+        return to_route('admin.social.show', $social);
     }
 
     /**
@@ -49,7 +53,7 @@ class SocialController extends Controller
      */
     public function show(Social $social)
     {
-        //
+        return inertia('Social/Show', ['social' => $social]);
     }
 
     /**
@@ -60,7 +64,7 @@ class SocialController extends Controller
      */
     public function edit(Social $social)
     {
-        //
+        return inertia('Social/Form', ['social' => $social]);
     }
 
     /**
@@ -72,7 +76,16 @@ class SocialController extends Controller
      */
     public function update(UpdateSocialRequest $request, Social $social)
     {
-        //
+        $icon = $social->icon;
+        if($request->file('icon') instanceof UploadedFile){
+            $icon = $request->file('icon')->store('socials', 'public');
+            if($icon !== $social->icon && Storage::disk('public')->exists($icon))
+                Storage::disk('public')->delete($social->icon);
+        }
+
+        $social->update([...$request->all(), 'icon' => $icon]);
+
+        return to_route('admin.social.show', $social);
     }
 
     /**
@@ -83,6 +96,8 @@ class SocialController extends Controller
      */
     public function destroy(Social $social)
     {
-        //
+        $social->delete();
+
+        return back();
     }
 }

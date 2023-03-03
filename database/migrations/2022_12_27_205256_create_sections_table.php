@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('title');
             $table->string('image')->nullable();
             $table->string('description')->nullable();

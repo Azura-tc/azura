@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\Service;
+
+use Illuminate\Http\UploadedFile;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -17,7 +19,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Service/Index', ['services' => Service::all()]);
     }
 
     /**
@@ -27,7 +29,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Service/Form');
     }
 
     /**
@@ -38,7 +40,9 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        //
+        $service = Service::create([...$request->all(), 'image' => $request->file('image')->store('services', 'public')]);
+
+        return to_route('admin.service.show', $service);
     }
 
     /**
@@ -49,7 +53,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return inertia('Service/Show', ['service' => $service]);
     }
 
     /**
@@ -60,7 +64,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return inertia('Service/Form', ['service' => $service]);
     }
 
     /**
@@ -72,7 +76,16 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $image = $service->image;
+        if($request->file('image') instanceof UploadedFile){
+            $image = $request->file('image')->store('services', 'public');
+            if($image !== $service->image && Storage::disk('public')->exists($image))
+                Storage::disk('public')->delete($service->image);
+        }
+
+        $service->update([...$request->all(), 'image' => $image]);
+
+        return to_route('admin.service.show', $service);
     }
 
     /**
@@ -83,6 +96,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        return back();
     }
 }

@@ -44,9 +44,9 @@ const submit = () => {
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Basic form elements</h4>
-            <p class="card-description"> Basic form elements </p>
-            
+            <h4 class="card-title">Information Form</h4>
+            <!-- <p class="card-description"> Basic form elements </p> -->
+
             <form @submit.prevent="submit" novalidate>
                 <div class="row">
                     <InputField
@@ -101,7 +101,6 @@ const submit = () => {
                     />
                 </div>
                 <button type="submit" class="btn btn-primary me-2">Submit</button>
-                <button class="btn btn-dark">Cancel</button>
             </form>
         </div>
         </div>

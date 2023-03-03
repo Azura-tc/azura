@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\Section;
+
+use Illuminate\Http\UploadedFile;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
+use Illuminate\Support\Facades\Storage;
 
 class SectionController extends Controller
 {
@@ -17,7 +19,8 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        // dd(Section::first()->image);
+        return inertia('Section/Index', ['sections' => Section::all()]);
     }
 
     /**
@@ -27,7 +30,7 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Section/Form');
     }
 
     /**
@@ -38,7 +41,12 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
-        //
+        // dd($request->all());
+        $section = Section::create([...$request->all(), 'image' => ($request->file('image') instanceof UploadedFile) ? $request->file('image')->store('sections', 'public') : null]);
+        // if($request->has('image') && $request->file('image') instanceof UploadedFile)
+        //     $section->image()->save(new Image(['path' => $request->image->store('sections', 'public')]));
+
+        return to_route('admin.section.show', $section);
     }
 
     /**
@@ -49,7 +57,7 @@ class SectionController extends Controller
      */
     public function show(Section $section)
     {
-        //
+        return inertia('Section/Show', ['section' => $section]);
     }
 
     /**
@@ -60,7 +68,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        //
+        return inertia('Section/Form', ['section' => $section]);
     }
 
     /**
@@ -72,7 +80,16 @@ class SectionController extends Controller
      */
     public function update(UpdateSectionRequest $request, Section $section)
     {
-        //
+        $image = $section->image;
+        if($request->file('image') instanceof UploadedFile){
+            $image = $request->file('image')->store('sections', 'public');
+            if($image !== $section->image && Storage::disk('public')->exists($image))
+                Storage::disk('public')->delete($section->image);
+        }
+
+        $section->update([...$request->all(), 'image' => $image]);
+
+        return to_route('admin.section.show', $section);
     }
 
     /**
@@ -83,6 +100,8 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
+
+        return back();
     }
 }

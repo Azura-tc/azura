@@ -1,6 +1,8 @@
 <script setup>
+import { onMounted, ref } from 'vue';
+
     const unique = Math.floor(Math.random() * 10)
-    defineProps({
+    const props = defineProps({
         modelValue: [String, Number],
         inputClass: String,
         labelClass: String,
@@ -33,10 +35,18 @@
         autocomplete:{
             type: Boolean,
             default: true
+        },
+        requireIndicator:{
+            type: Boolean,
+            default: true
         }
     })
 
     defineEmits(['update:modelValue'])
+
+    const elt = ref(null)
+
+    onMounted(() => { if(props.autofocus) elt.value.focus()})
 
 </script>
 <template>
@@ -46,9 +56,10 @@
           class="form-label"
           :for="inputId"
           v-if="label"
-        >{{ label }}</label>
+        >{{ label }} <span v-if="required && requireIndicator" class="text-danger">*</span> </label>
         <component :is="(isTextarea)? 'textarea' : 'input'"
           :value="modelValue"
+          v-model="modelValue"
           :autofocus="autofocus"
           :class="[{ 'is-invalid' : error }, inputClass]"
           :type="type"
@@ -58,6 +69,7 @@
           :autocomplete="`${autocomplete?'on':'off'}`"
           :placeholder="placeholder"
           :required="required"
+          ref="elt"
         />
         <div v-if="error" class="invalid-feedback" v-text="error"></div>
     </div>

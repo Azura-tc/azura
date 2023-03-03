@@ -13,7 +13,7 @@ class StoreSocialRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreSocialRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'min:3', 'max:20'],
+            'url' => ['required', 'url'],
+            'icon' => ['required', 'image', 'file'],
         ];
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Front\Layouts\Partials;
+namespace App\View\Components\Front\Sections;
 
 use Illuminate\View\Component;
 
-class Footer extends Component
+class Features extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class Footer extends Component
      */
     public function render()
     {
-        return view('front.layouts.partials.footer');
+        return view('front.sections.features');
     }
 }

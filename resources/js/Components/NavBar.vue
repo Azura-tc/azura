@@ -183,7 +183,7 @@ const mobileSidebarToggle = () => document.getElementById('sidebar')?.classList.
                 </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <Link :href="route('logout')"  method="post" as="button" class="dropdown-item preview-item">
+                <Link :href="route('logout')" method="post" as="button" class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                         <i class="mdi mdi-logout text-danger"></i>

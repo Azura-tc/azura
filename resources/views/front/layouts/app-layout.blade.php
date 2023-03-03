@@ -3,4 +3,5 @@
     <main>
         {{$slot}}
     </main>
+    <x-front.layouts.partials.footer />
 </x-front.base-layout>

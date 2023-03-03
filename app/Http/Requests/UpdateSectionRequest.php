@@ -13,7 +13,7 @@ class UpdateSectionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateSectionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'name' => ['required', 'string', 'min:3', 'max:20'],
+            'title' => ['required', 'string', 'min:3', 'max:255'],
+            'image' => ['file', 'image', 'nullable'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

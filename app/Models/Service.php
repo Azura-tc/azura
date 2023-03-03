@@ -2,15 +2,29 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Traits\UserCreatedTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model
 {
     use HasFactory, SoftDeletes, UserCreatedTrait;
+
+    protected $fillable = [
+        'title',
+        'image',
+        'description',
+    ];
+
+    public function image() : Attribute
+    {
+        return Attribute::get(fn($value) => (!is_null($value) && Storage::disk('public')->exists($value)) ? Storage::url($value) : $value);
+    }
 
     public function createdBy():BelongsTo
     {
